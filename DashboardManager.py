@@ -29,5 +29,3 @@ def load_json_if_exists(path):
 
 congestion_data = load_csv_or_md_data()
 prediction_data = load_json_if_exists("data/prediction.json")
-
-DashboardManager(congestion_data, prediction_data).display_dashboard()
