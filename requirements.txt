@@ -1,20 +1,2 @@
-# Subway Congestion Dashboard
-
-## Run locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-## Data
-Place congestion files in `data/` using the existing schema:
-`DOW_SE, LINE, STTN_NO, DPTRE_STTN, UP_DOWN_SE, TIME0530 ... TIME0030`.
-
-Optional prediction data can be saved as `data/prediction.json` either as a list of rows or:
-
-```json
-{"predictions": [ ... ]}
-```
-
-For easiest integration, prediction rows should use the same `LINE`, `DPTRE_STTN`, `DOW_SE`, `UP_DOWN_SE`, and `TIME....` fields as the congestion data.
+streamlit
+pandas
