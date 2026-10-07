@@ -2,7 +2,6 @@ import glob
 import json
 import os
 import pandas as pd
-from DashboardManager import DashboardManager
 
 
 def load_csv_or_md_data():
