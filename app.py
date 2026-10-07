@@ -5,7 +5,8 @@ import pandas as pd
 import streamlit as st
 from DashboardManager import DashboardManager
 
-st.write("🔥 새로운 app.py 실행됨")
+files = glob.glob("data/*호선.md")
+st.write("찾은 파일:", files)
 
 def load_csv_or_md_data():
     rows = []
