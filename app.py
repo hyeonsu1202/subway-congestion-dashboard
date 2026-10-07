@@ -12,8 +12,10 @@ def load_csv_or_md_data():
         try:
             df = pd.read_csv(path, encoding="utf-8-sig")
             rows.extend(df.to_dict(orient="records"))
+
         except Exception as e:
-            print(f"파일 읽기 실패: {path}, {e}")
+            print(f"파일 읽기 실패: {path}")
+            print(e)
 
     return rows
 
