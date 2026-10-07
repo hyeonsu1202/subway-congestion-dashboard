@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 from DashboardManager import DashboardManager
 
+st.write("🔥 새로운 app.py 실행됨")
 
 def load_csv_or_md_data():
     rows = []
