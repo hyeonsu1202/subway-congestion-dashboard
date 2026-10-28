@@ -4,19 +4,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 웹사이트</title>
+
+    <title>지하철 혼잡도 대시보드</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* 전체 화면 */
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 30px 50px;
+        }
+
+        /* 상단 제목 */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #555;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 500;
+        }
+
+        /* 메인 영역 */
+        .main {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            min-height: 550px;
+            padding-top: 80px;
+            gap: 30px;
+        }
+
+        /* 왼쪽 호선 선택 */
+        .line-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+
+            border: 2px solid #ddd;
+            border-radius: 35px;
+
+            padding: 20px 15px;
+            height: fit-content;
+        }
+
+        .line-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+            border: 2px solid #999;
+
+            background-color: white;
+            cursor: pointer;
+
+            font-size: 17px;
+            transition: 0.2s;
+        }
+
+        .line-btn:hover {
+            background-color: #eee;
+        }
+
+        .line-btn.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        /* 중앙 영역 */
+        .center-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center-text {
+            color: #aaa;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* 오른쪽 선택 영역 */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+
+            width: 180px;
+        }
+
+        /* 토글 선택 박스 */
+        .toggle-box {
+            border: 2px solid #ddd;
+            border-radius: 30px;
+
+            padding: 15px;
+            width: 100%;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .toggle-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .toggle-btn {
+            border: 1px solid #aaa;
+            border-radius: 20px;
+
+            background-color: white;
+            padding: 8px 10px;
+
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-btn.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        /* 시간 선택 */
+        .time-picker {
+            width: 110px;
+            height: 150px;
+
+            border: 2px solid #ddd;
+            border-radius: 12px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .time-item {
+            width: 100%;
+            height: 45px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 16px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .time-item.selected {
+            color: #111;
+            font-size: 22px;
+            font-weight: bold;
+
+            border-top: 1px solid #aaa;
+            border-bottom: 1px solid #aaa;
+        }
+
+        /* 혼잡도 범례 */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            border: 1px solid #555;
+        }
+
+        .green {
+            background-color: #58d68d;
+        }
+
+        .yellow {
+            background-color: #f4d03f;
+        }
+
+        .pink {
+            background-color: #f1948a;
+        }
+
+        .red {
+            background-color: #ff3030;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px;
+            }
+
+            .main {
+                gap: 10px;
+                padding-top: 40px;
+            }
+
+            .line-selector {
+                padding: 12px 8px;
+            }
+
+            .line-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+
+            .right-panel {
+                width: 145px;
+            }
+
+            .toggle-btn {
+                padding: 6px;
+                font-size: 11px;
+            }
+
+            .legend {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>안녕하세요!</h1>
+    <div class="container">
 
-    <p>GitHub로 만든 첫 번째 웹사이트입니다.</p>
+        <!-- 상단 제목 -->
+        <header class="header">
+            <h1>시간을 나타내는 이미지</h1>
+        </header>
 
-    <button onclick="alert('버튼 클릭 성공!')">
-        클릭하기
-    </button>
+        <!-- 메인 영역 -->
+        <main class="main">
+
+            <!-- 왼쪽 호선 선택 -->
+            <div class="line-selector" id="lineSelector">
+
+                <button class="line-btn active" data-line="1">1</button>
+                <button class="line-btn" data-line="2">2</button>
+                <button class="line-btn" data-line="3">3</button>
+                <button class="line-btn" data-line="4">4</button>
+                <button class="line-btn" data-line="5">5</button>
+                <button class="line-btn" data-line="6">6</button>
+                <button class="line-btn" data-line="7">7</button>
+                <button class="line-btn" data-line="8">8</button>
+
+            </div>
+
+            <!-- 중앙 영역 : 노선도 제외 -->
+            <div class="center-area">
+
+                <div class="center-text" id="selectionInfo">
+                    1호선 · 상선 · 평일 · 4:30
+                </div>
+
+            </div>
+
+            <!-- 오른쪽 선택 패널 -->
+            <div class="right-panel">
+
+                <!-- 방향 및 요일 -->
+                <div class="toggle-box">
+
+                    <div class="toggle-row" id="directionSelector">
+
+                        <button class="toggle-btn active" data-value="상선">
+                            상선
+                        </button>
+
+                        <button class="toggle-btn" data-value="하선">
+                            하선
+                        </button>
+
+                    </div>
+
+                    <div class="toggle-row" id="daySelector">
+
+                        <button class="toggle-btn active" data-value="평일">
+                            평일
+                        </button>
+
+                        <button class="toggle-btn" data-value="토요일">
+                            토요일
+                        </button>
+
+                        <button class="toggle-btn" data-value="일요일">
+                            일요일
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- 시간 선택 -->
+                <div class="time-picker" id="timePicker">
+
+                    <div class="time-item" id="prevTime"></div>
+
+                    <div class="time-item selected" id="currentTime"></div>
+
+                    <div class="time-item" id="nextTime"></div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- 혼잡도 범례 -->
+        <div class="legend">
+
+            <div class="legend-item">
+                <span class="dot green"></span>
+                원활
+            </div>
+
+            <div class="legend-item">
+                <span class="dot yellow"></span>
+                보통
+            </div>
+
+            <div class="legend-item">
+                <span class="dot pink"></span>
+                혼잡
+            </div>
+
+            <div class="legend-item">
+                <span class="dot red"></span>
+                매우 혼잡
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // 현재 선택 상태
+        let selectedLine = 1;
+        let selectedDirection = "상선";
+        let selectedDay = "평일";
+
+        // 시간은 분 단위로 관리
+        let selectedTime = 270; // 4:30
+
+        // 선택 정보 표시
+        function updateSelectionInfo() {
+
+            const timeText = formatTime(selectedTime);
+
+            document.getElementById("selectionInfo").textContent =
+                `${selectedLine}호선 · ${selectedDirection} · ${selectedDay} · ${timeText}`;
+
+        }
+
+        // 호선 선택
+        const lineButtons = document.querySelectorAll(".line-btn");
+
+        lineButtons.forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                lineButtons.forEach(btn => btn.classList.remove("active"));
+
+                this.classList.add("active");
+
+                selectedLine = this.dataset.line;
+
+                updateSelectionInfo();
+
+            });
+
+        });
+
+        // 방향 선택
+        const directionButtons =
+            document.querySelectorAll("#directionSelector .toggle-btn");
+
+        directionButtons.forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                directionButtons.forEach(btn => btn.classList.remove("active"));
+
+                this.classList.add("active");
+
+                selectedDirection = this.dataset.value;
+
+                updateSelectionInfo();
+
+            });
+
+        });
+
+        // 요일 선택
+        const dayButtons =
+            document.querySelectorAll("#daySelector .toggle-btn");
+
+        dayButtons.forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                dayButtons.forEach(btn => btn.classList.remove("active"));
+
+                this.classList.add("active");
+
+                selectedDay = this.dataset.value;
+
+                updateSelectionInfo();
+
+            });
+
+        });
+
+        // 시간 변환
+        function formatTime(minutes) {
+
+            const normalized = ((minutes % 1440) + 1440) % 1440;
+
+            const hour = Math.floor(normalized / 60);
+            const minute = normalized % 60;
+
+            return `${hour}:${minute.toString().padStart(2, "0")}`;
+
+        }
+
+        // 시간 화면 업데이트
+        function updateTimePicker() {
+
+            document.getElementById("prevTime").textContent =
+                formatTime(selectedTime - 30);
+
+            document.getElementById("currentTime").textContent =
+                formatTime(selectedTime);
+
+            document.getElementById("nextTime").textContent =
+                formatTime(selectedTime + 30);
+
+            updateSelectionInfo();
+
+        }
+
+        // 이전 시간
+        document.getElementById("prevTime").addEventListener("click", () => {
+
+            selectedTime = (selectedTime - 30 + 1440) % 1440;
+
+            updateTimePicker();
+
+        });
+
+        // 다음 시간
+        document.getElementById("nextTime").addEventListener("click", () => {
+
+            selectedTime = (selectedTime + 30) % 1440;
+
+            updateTimePicker();
+
+        });
+
+        // 마우스 휠로 시간 변경
+        document.getElementById("timePicker").addEventListener("wheel", (event) => {
+
+            event.preventDefault();
+
+            if (event.deltaY > 0) {
+                selectedTime = (selectedTime + 30) % 1440;
+            } else {
+                selectedTime = (selectedTime - 30 + 1440) % 1440;
+            }
+
+            updateTimePicker();
+
+        }, { passive: false });
+
+        // 초기 실행
+        updateTimePicker();
+
+    </script>
 
 </body>
-
 </html>
