@@ -63,7 +63,8 @@ function drawLine1() {
 
             this.classList.add("selected");
 
-            console.log("선택한 역:", station.name);
+            // 선택한 역의 모달 열기
+            openModal(station.name);
         });
 
         svg.appendChild(circle);
@@ -91,17 +92,72 @@ function drawLine1() {
     stationMap.appendChild(svg);
 }
 
+// 모달 열기
 function openModal(stationName) {
 
     const modal = document.querySelector(".modal-overlay");
 
-    // 호선과 역 이름
-    document.querySelector(".modal-line").textContent = "1";
-    document.querySelector(".modal-station").textContent = stationName;
+    // 현재 선택된 호선
+    const selectedLine = document.querySelector(".line-btn.active");
+
+    // 현재 선택된 방향
+    const selectedDirection = document.querySelector(
+        "#direction-selector .toggle-btn.active"
+    );
+
+    // 현재 선택된 요일
+    const selectedDay = document.querySelector(
+        "#day-selector .toggle-btn.active"
+    );
+
+    // 현재 선택된 시간
+    const selectedTime = document.querySelector("#currentTime");
+
+    // 호선 및 역 이름 표시
+    document.querySelector(".modal-line").textContent =
+        selectedLine.dataset.line;
+
+    document.querySelector(".modal-station").textContent =
+        stationName;
+
+    // 방향 · 요일 · 시간 표시
+    document.querySelector(".modal-info").textContent =
+        `${selectedDirection.dataset.direction} · ${selectedDay.dataset.daytype} · ${selectedTime.textContent.trim() || "4:30"}`;
 
     // 모달 표시
     modal.classList.add("active");
 }
 
+
+// 모달 닫기 버튼
+document.querySelector(".modal-close").addEventListener("click", function() {
+
+    document.querySelector(".modal-overlay").classList.remove("active");
+
+});
+
+
+// 모달 바깥 영역 클릭 시 닫기
+document.querySelector(".modal-overlay").addEventListener("click", function(event) {
+
+    if (event.target === this) {
+
+        this.classList.remove("active");
+
+    }
+
+});
+
+
+// ESC 키로 모달 닫기
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        document.querySelector(".modal-overlay").classList.remove("active");
+
+    }
+
+});
 // 처음 화면에 1호선 표시
 drawLine1();
