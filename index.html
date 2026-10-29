@@ -2,13 +2,13 @@
 <html lang="ko">
 
 <head>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>지하철 혼잡도 대시보드</title>
+    <title>subway-congestion-dashboard</title>
 
     <link rel="stylesheet" href="style.css">
-
+    
 </head>
 
 <body>
@@ -123,151 +123,6 @@
         </div>
 
     </div>
-
-    <script>
-
-        // 현재 선택 상태
-        let selectedLine = 1;
-        let selectedDirection = "상선";
-        let selectedDay = "평일";
-
-        // 시간은 분 단위로 관리
-        let selectedTime = 270; // 4:30
-
-        // 선택 정보 표시
-        function updateSelectionInfo() {
-
-            const timeText = formatTime(selectedTime);
-
-            document.getElementById("selectionInfo").textContent =
-                `${selectedLine}호선 · ${selectedDirection} · ${selectedDay} · ${timeText}`;
-
-        }
-
-        // 호선 선택
-        const lineButtons = document.querySelectorAll(".line-btn");
-
-        lineButtons.forEach(button => {
-
-            button.addEventListener("click", function() {
-
-                lineButtons.forEach(btn => btn.classList.remove("active"));
-
-                this.classList.add("active");
-
-                selectedLine = this.dataset.line;
-
-                updateSelectionInfo();
-
-            });
-
-        });
-
-        // 방향 선택
-        const directionButtons =
-            document.querySelectorAll("#directionSelector .toggle-btn");
-
-        directionButtons.forEach(button => {
-
-            button.addEventListener("click", function() {
-
-                directionButtons.forEach(btn => btn.classList.remove("active"));
-
-                this.classList.add("active");
-
-                selectedDirection = this.dataset.value;
-
-                updateSelectionInfo();
-
-            });
-
-        });
-
-        // 요일 선택
-        const dayButtons =
-            document.querySelectorAll("#daySelector .toggle-btn");
-
-        dayButtons.forEach(button => {
-
-            button.addEventListener("click", function() {
-
-                dayButtons.forEach(btn => btn.classList.remove("active"));
-
-                this.classList.add("active");
-
-                selectedDay = this.dataset.value;
-
-                updateSelectionInfo();
-
-            });
-
-        });
-
-        // 시간 변환
-        function formatTime(minutes) {
-
-            const normalized = ((minutes % 1440) + 1440) % 1440;
-
-            const hour = Math.floor(normalized / 60);
-            const minute = normalized % 60;
-
-            return `${hour}:${minute.toString().padStart(2, "0")}`;
-
-        }
-
-        // 시간 화면 업데이트
-        function updateTimePicker() {
-
-            document.getElementById("prevTime").textContent =
-                formatTime(selectedTime - 30);
-
-            document.getElementById("currentTime").textContent =
-                formatTime(selectedTime);
-
-            document.getElementById("nextTime").textContent =
-                formatTime(selectedTime + 30);
-
-            updateSelectionInfo();
-
-        }
-
-        // 이전 시간
-        document.getElementById("prevTime").addEventListener("click", () => {
-
-            selectedTime = (selectedTime - 30 + 1440) % 1440;
-
-            updateTimePicker();
-
-        });
-
-        // 다음 시간
-        document.getElementById("nextTime").addEventListener("click", () => {
-
-            selectedTime = (selectedTime + 30) % 1440;
-
-            updateTimePicker();
-
-        });
-
-        // 마우스 휠로 시간 변경
-        document.getElementById("timePicker").addEventListener("wheel", (event) => {
-
-            event.preventDefault();
-
-            if (event.deltaY > 0) {
-                selectedTime = (selectedTime + 30) % 1440;
-            } else {
-                selectedTime = (selectedTime - 30 + 1440) % 1440;
-            }
-
-            updateTimePicker();
-
-        }, { passive: false });
-
-        // 초기 실행
-        updateTimePicker();
-
-    </script>
 
 </body>
 </html>
