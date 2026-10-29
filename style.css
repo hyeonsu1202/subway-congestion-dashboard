@@ -55,6 +55,7 @@ body {
     border-radius: 35px;
     padding: 20px 15px;
     height: fit-content;
+    margin-bottom: 10px
 }
 
 .line-btn {
@@ -103,7 +104,7 @@ body {
     align-items: center;
     gap: 30px;
     width: 220px;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 /* 방향 및 요일 토글 */
