@@ -102,6 +102,7 @@ body {
     align-items: center;
     gap: 30px;
     width: 220px;
+    margin-top: 50px;
 }
 
 /* 방향 및 요일 토글 */
@@ -111,7 +112,6 @@ body {
     border-radius: 30px;
     padding: 15px;
     width: 100%;
-    margin-top: 50px;
 }
 
 .toggle-row {
@@ -126,7 +126,7 @@ body {
 }
 
 .toggle-btn {
-    border: 2px solid #999;
+    border: 1.5px solid #999;
     border-radius: 20px;
     background-color: white;
     padding: 8px 10px;
@@ -192,7 +192,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 35px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .legend-item {
