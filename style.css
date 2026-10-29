@@ -33,6 +33,13 @@ body {
     margin: 0;
 }
 
+.selection-info {
+    color: #aaa;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px
+}
+
 /* 메인 영역 */
 
 .main {
@@ -55,7 +62,7 @@ body {
     border-radius: 35px;
     padding: 20px 15px;
     height: fit-content;
-    margin-bottom: 10px
+    margin-top: -10px
 }
 
 .line-btn {
@@ -87,13 +94,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.selection-info {
-    color: #aaa;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 20px
 }
 
 /* 오른쪽 선택 패널 */
