@@ -91,5 +91,17 @@ function drawLine1() {
     stationMap.appendChild(svg);
 }
 
+function openModal(stationName) {
+
+    const modal = document.querySelector(".modal-overlay");
+
+    // 호선과 역 이름
+    document.querySelector(".modal-line").textContent = "1";
+    document.querySelector(".modal-station").textContent = stationName;
+
+    // 모달 표시
+    modal.classList.add("active");
+}
+
 // 처음 화면에 1호선 표시
 drawLine1();
