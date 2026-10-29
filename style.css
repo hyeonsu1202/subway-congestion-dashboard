@@ -273,7 +273,7 @@ body {
     padding-right: 20px;
 }
 
-/* 호선 + 역 이름 */
+/* 호선, 역 이름 */
 .modal-title {
     display: flex;
     align-items: center;
@@ -304,7 +304,7 @@ body {
     color: #555;
 }
 
-/* 오른쪽 예상 혼잡도 */
+/* 예상 혼잡도 */
 .modal-right {
     text-align: center;
 }
@@ -379,55 +379,4 @@ body {
 .predicted-bar {
     width: 92.4%;
     background-color: #ff3030;
-}
-
-
-
-
-
-
-
-
-
-.station-map {
-    width: 75%;
-    overflow: visible;
-}
-
-.subway-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.subway-path {
-    fill: none;
-    stroke: #0052a4;
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.station-dot {
-    fill: white;
-    stroke: #0052a4;
-    stroke-width: 4;
-    cursor: pointer;
-    transition: fill 0.2s;
-}
-
-.station-dot:hover {
-    fill: #b3d9ff;
-}
-
-.station-dot.selected {
-    fill: #ffd54f;
-}
-
-.station-label {
-    font-size: 15px;
-    font-weight: bold;
-    text-anchor: middle;
-    fill: #333;
-    pointer-events: none;
 }
