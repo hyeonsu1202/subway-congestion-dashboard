@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-/* 전체 컨테이너 */
+/* 전체 */
 
 .container {
     width: 100%;
@@ -19,7 +19,7 @@ body {
     padding: 30px 50px;
 }
 
-/* 상단 제목 */
+/* 제목 */
 
 .header {
     text-align: center;
