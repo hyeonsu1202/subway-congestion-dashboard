@@ -1,6 +1,4 @@
-/* =========================
-   기본 설정
-========================= */
+/* 기본 설정 */
 
 * {
     box-sizing: border-box;
@@ -13,9 +11,7 @@ body {
     color: #333;
 }
 
-/* =========================
-   전체 컨테이너
-========================= */
+/* 전체 컨테이너 */
 
 .container {
     width: 100%;
@@ -23,9 +19,7 @@ body {
     padding: 30px 50px;
 }
 
-/* =========================
-   상단 제목
-========================= */
+/* 상단 제목 */
 
 .header {
     text-align: center;
@@ -39,33 +33,26 @@ body {
     margin: 0;
 }
 
-/* =========================
-   메인 영역
-========================= */
+/* 메인 영역 */
 
 .main {
     display: flex;
     justify-content: space-between;
     position: relative;
-
     min-height: 550px;
     padding-top: 80px;
     gap: 30px;
 }
 
-/* =========================
-   왼쪽 호선 선택
-========================= */
+/* 호선 선택 */
 
 .line-selector {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-
     border: 2px solid #ddd;
     border-radius: 35px;
-
     padding: 20px 15px;
     height: fit-content;
 }
@@ -73,15 +60,11 @@ body {
 .line-btn {
     width: 42px;
     height: 42px;
-
     border-radius: 50%;
     border: 2px solid #999;
-
     background-color: white;
-
     cursor: pointer;
     font-size: 17px;
-
     transition: 0.2s;
 }
 
@@ -96,45 +79,36 @@ body {
     border-color: #333;
 }
 
-/* =========================
-   중앙 영역
-========================= */
+/* 중앙 영역 */
 
 .center-area {
     flex: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.center-text {
+.selection-info {
     color: #aaa;
     font-size: 18px;
     text-align: center;
 }
 
-/* =========================
-   오른쪽 선택 패널
-========================= */
+/* 오른쪽 선택 패널 */
 
 .right-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 30px;
-    width: 180px;
+    width: 220px;
 }
 
-/* =========================
-   방향 / 요일 토글
-========================= */
+/* 방향 및 요일 토글 */
 
 .toggle-box {
     border: 2px solid #ddd;
     border-radius: 30px;
-
     padding: 15px;
     width: 100%;
 }
@@ -143,7 +117,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 5px;
-
     margin-bottom: 10px;
 }
 
@@ -152,14 +125,11 @@ body {
 }
 
 .toggle-btn {
-    border: 1px solid #aaa;
+    border: 2px solid #999;
     border-radius: 20px;
-
     background-color: white;
-
     padding: 8px 10px;
     font-size: 12px;
-
     cursor: pointer;
     transition: 0.2s;
 }
@@ -174,22 +144,17 @@ body {
     border-color: #333;
 }
 
-/* =========================
-   시간 선택 휠 피커
-========================= */
+/* 시간 선택 휠 피커 */
 
 .time-picker {
     width: 110px;
     height: 150px;
-
     border: 2px solid #ddd;
     border-radius: 12px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
 }
 
@@ -197,25 +162,21 @@ body {
     width: 100%;
     height: 45px;
     flex-shrink: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 16px;
     color: #aaa;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
 .time-item:hover {
-    color: #555;
+    color: #eee;
 }
 
 .time-item.selected {
-    color: #111;
+    color: #333;
     font-size: 22px;
     font-weight: bold;
 
@@ -223,15 +184,12 @@ body {
     border-bottom: 1px solid #aaa;
 }
 
-/* =========================
-   혼잡도 범례
-========================= */
+/* 혼잡도 범례 */
 
 .legend {
     display: flex;
     justify-content: center;
     align-items: center;
-
     gap: 35px;
     margin-top: 20px;
 }
@@ -239,7 +197,6 @@ body {
 .legend-item {
     display: flex;
     align-items: center;
-
     gap: 8px;
     font-size: 14px;
 }
@@ -247,7 +204,6 @@ body {
 .dot {
     width: 13px;
     height: 13px;
-
     border-radius: 50%;
     border: 1px solid #555;
 }
@@ -268,63 +224,4 @@ body {
 
 .red {
     background-color: #ff3030;
-}
-
-/* =========================
-   모바일 화면 대응
-========================= */
-
-@media (max-width: 700px) {
-
-    .container {
-        padding: 20px;
-    }
-
-    .header h1 {
-        font-size: 20px;
-    }
-
-    .main {
-        gap: 10px;
-        padding-top: 40px;
-        min-height: 450px;
-    }
-
-    .line-selector {
-        padding: 12px 8px;
-        gap: 8px;
-    }
-
-    .line-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
-    }
-
-    .right-panel {
-        width: 145px;
-        flex-shrink: 0;
-    }
-
-    .toggle-box {
-        padding: 10px 5px;
-    }
-
-    .toggle-btn {
-        padding: 6px;
-        font-size: 11px;
-    }
-
-    .center-text {
-        font-size: 13px;
-    }
-
-    .legend {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .legend-item {
-        font-size: 12px;
-    }
 }
