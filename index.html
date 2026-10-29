@@ -15,16 +15,11 @@
 
     <div class="container">
 
-        <!-- 상단 제목 -->
-        <header class="header">
-            <h1>시간을 나타내는 이미지</h1>
-        </header>
-
-        <!-- 메인 영역 -->
+        <!-- 메인 -->
         <main class="main">
 
-            <!-- 왼쪽 호선 선택 -->
-            <div class="line-selector" id="lineSelector">
+            <!-- 왼쪽 패널, 호선 선택 -->
+            <div class="line-selector">
 
                 <button class="line-btn active" data-line="1">1</button>
                 <button class="line-btn" data-line="2">2</button>
@@ -37,22 +32,22 @@
 
             </div>
 
-            <!-- 중앙 영역 : 노선도 제외 -->
+            <!-- 중앙 -->
             <div class="center-area">
 
-                <div class="center-text" id="selectionInfo">
+                <div class="selection-info">
                     1호선 · 상선 · 평일 · 4:30
                 </div>
 
             </div>
 
-            <!-- 오른쪽 선택 패널 -->
+            <!-- 오른쪽 패널 -->
             <div class="right-panel">
 
-                <!-- 방향 및 요일 -->
+                <!-- 방향 및 요일 선택 -->
                 <div class="toggle-box">
 
-                    <div class="toggle-row" id="directionSelector">
+                    <div class="toggle-row" id="direction-selector">
 
                         <button class="toggle-btn active" data-value="상선">
                             상선
@@ -64,7 +59,7 @@
 
                     </div>
 
-                    <div class="toggle-row" id="daySelector">
+                    <div class="toggle-row" id="day-selector">
 
                         <button class="toggle-btn active" data-value="평일">
                             평일
@@ -83,13 +78,13 @@
                 </div>
 
                 <!-- 시간 선택 -->
-                <div class="time-picker" id="timePicker">
+                <div class="time-picker">
+                    
+                    <div class="time-item" id="prevTime"></div>    <!-- 이전 시간 -->
 
-                    <div class="time-item" id="prevTime"></div>
+                    <div class="time-item selected" id="currentTime"></div>    <!-- 선택된 시간 -->
 
-                    <div class="time-item selected" id="currentTime"></div>
-
-                    <div class="time-item" id="nextTime"></div>
+                    <div class="time-item" id="nextTime"></div>    <!-- 이후 시간 -->
 
                 </div>
 
